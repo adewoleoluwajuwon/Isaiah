@@ -19,7 +19,7 @@ export default function AppNavbar() {
       <NavbarBrand href="#">
         <img src="/logo.svg" className="mr-3 h-6 sm:h-8" alt="Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Your Name
+          Isaiah
         </span>
       </NavbarBrand>
 

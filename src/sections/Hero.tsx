@@ -11,7 +11,7 @@ export default function Hero() {
             Hello, I’m
           </p>
           <h1 className="mt-2 text-4xl md:text-6xl font-extrabold tracking-tight">
-            Your Name
+            Adewole O. Isaiah
           </h1>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
             Frontend / Full‑Stack Developer • React • TypeScript • Tailwind
