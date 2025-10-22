@@ -105,7 +105,8 @@ export default function Contact() {
         </div>
 
         <p className="mt-3 text-slate-700 dark:text-slate-300">
-          Prefer email? Use the button, or the form below.
+          Prefer email? <small>adewoleoluwajuwon@gmail.com</small> OR Use the
+          button, or the form below.
         </p>
 
         {/* Quick actions */}
