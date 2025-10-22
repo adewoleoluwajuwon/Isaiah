@@ -1,11 +1,13 @@
 /* eslint-disable no-undef */
 // tailwind.config.js
-module.exports = {
+/** @type {import('tailwindcss').Config} */
+export default {
   darkMode: "class",
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/flowbite/**/*.js",
-    "./node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+    "./index.html",
+    "./src/**/*.{ts,tsx,js,jsx}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
+  theme: { extend: {} },
   plugins: [require("flowbite/plugin")],
 };

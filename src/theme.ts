@@ -2,7 +2,7 @@ export function getStoredTheme() {
   return localStorage.getItem("theme") as "light" | "dark" | null;
 }
 export function setTheme(theme: "light" | "dark") {
-  const root = document.documentElement;
+  const root = document.documentElement; // <html>
   if (theme === "dark") root.classList.add("dark");
   else root.classList.remove("dark");
   localStorage.setItem("theme", theme);
