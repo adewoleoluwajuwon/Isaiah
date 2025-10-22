@@ -1,12 +1,13 @@
 // src/sections/Contact.tsx
 import Section from "../components/Section";
 import { Button, Label, TextInput, Textarea } from "flowbite-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [downloadingCv, setDownloadingCv] = useState(false);
 
   const isValidEmail = useMemo(
     () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
@@ -14,6 +15,34 @@ export default function Contact() {
   );
   const isValid =
     name.trim().length > 1 && isValidEmail && message.trim().length > 4;
+
+  // shared helper (same behavior as in Hero)
+  const downloadCv = async (setLoading: (v: boolean) => void) => {
+    setLoading(true);
+    try {
+      const res = await fetch("/cv.pdf");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const blob = await res.blob();
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Adewole-Isaiah-CV.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      // Mobile/iOS fallback
+      window.open("/cv.pdf", "_blank", "noopener,noreferrer");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDownloadCv = useCallback(() => {
+    void downloadCv(setDownloadingCv);
+  }, []);
 
   return (
     <Section id="contact" className="scroll-mt-24">
@@ -53,16 +82,19 @@ export default function Contact() {
             Email me
           </Button>
 
-          <a href="/cv.pdf" className="md:w-48">
-            <Button
-              color="light"
-              className="w-full !font-semibold
-                         !bg-transparent !text-slate-800 !border !border-slate-300 hover:!bg-slate-100
-                         dark:!text-slate-100 dark:!border-slate-600 dark:hover:!bg-white/10"
-            >
-              Download CV
-            </Button>
-          </a>
+          {/* Programmatic Download CV */}
+          <Button
+            onClick={handleDownloadCv}
+            disabled={downloadingCv}
+            aria-busy={downloadingCv}
+            className="md:w-48 !font-semibold
+                       !bg-transparent !text-slate-800 !border !border-slate-300 hover:!bg-slate-100
+                       dark:!text-slate-100 dark:!border-slate-600 dark:hover:!bg-white/10
+                       disabled:!opacity-60 disabled:cursor-not-allowed"
+            title={downloadingCv ? "Downloading…" : "Download CV"}
+          >
+            {downloadingCv ? "Downloading…" : "Download CV"}
+          </Button>
         </div>
 
         {/* Form */}
