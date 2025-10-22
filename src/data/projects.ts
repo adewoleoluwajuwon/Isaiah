@@ -10,43 +10,57 @@ export const projects: Project[] = [
   {
     title: "SyncSAP Portal",
     description:
-      "An SAP B1 integration portal with React + Tailwind frontend and Spring Boot backend. Includes authentication, dashboard UI, and real-time data sync with SAP.",
+      "An SAP B1 integration portal with React + Tailwind frontend and Spring Boot backend. Includes authentication, dashboard UI, and real-time data sync with SAP. WIP",
     tags: ["React", "Tailwind", "Spring Boot", "SAP B1"],
-    href: "#",
+    href: "#", // (WIP - no live link yet)
   },
   {
-    title: "FarmerBuyer Marketplace",
+    title: "React, Tailwind, Flowbite Website",
     description:
-      "A React-powered marketplace connecting farmers and buyers, featuring secure payments, JWT authentication, and admin dashboards.",
-    tags: ["React", "Node.js", "PostgreSQL", "JWT Auth"],
-    href: "#",
-  },
-  {
-    title: "USSD Config UI",
-    description:
-      "A dynamic React application for configuring USSD menus using Flowbite components and DataTables for live menu management.",
-    tags: ["React", "Flowbite", "TypeScript", "DataTables"],
-    href: "#",
+      "A React-powered modern website showcasing responsive design and Flowbite UI components.",
+    tags: ["React", "Tailwind", "Flowbite"],
+    href: "https://idm-phi.vercel.app/", // ✅ Live demo link
   },
   {
     title: "SyncPOS Backend System",
     description:
       "Backend system for a supermarket POS platform with modules for goods receipt, purchase orders, and warehouse tracking.",
     tags: ["Spring Boot", "MySQL", "REST APIs"],
-    href: "#",
+    href: "#", // (private or backend-only project)
   },
   {
     title: "Secure QR Code Generator",
     description:
       "A Node.js + .NET service that dynamically generates secure IRN QR codes with API-based certificate and key handling.",
     tags: ["Node.js", ".NET", "API Integration"],
-    href: "#",
+    href: "#", // (not public)
   },
   {
     title: "Smart Device Offer Engine",
     description:
       "A Java-based eligibility and MSAP integration engine used in telecom device offer workflows.",
     tags: ["Java", "Oracle", "Integration"],
-    href: "#",
+    href: "#", // (private repo)
+  },
+  {
+    title: "Shopping List App",
+    description:
+      "A simple, responsive shopping list app built with vanilla JavaScript and local storage support.",
+    tags: ["JavaScript", "HTML", "CSS"],
+    href: "https://adewoleoluwajuwon.github.io/gitable-shopping-list/", // ✅ Live demo
+  },
+  {
+    title: "Chuck Norris Random Joke App",
+    description:
+      "A fun web app that fetches random Chuck Norris jokes from an external API using async JavaScript.",
+    tags: ["JavaScript", "API", "HTML", "CSS"],
+    href: "https://adewoleoluwajuwon.github.io/ChuckNorrisRandomJokeApp/", // ✅ Live demo
+  },
+  {
+    title: "Cross-Database Engine (.NET)",
+    description:
+      "A .NET Framework-based cross-database import/export engine for data migration and synchronization between SQL systems.",
+    tags: ["C#", ".NET Framework", "SQL"],
+    href: "https://github.com/adewoleoluwajuwon/-Cross-Database-Import-Export-Engine", // ✅ GitHub repo
   },
 ];

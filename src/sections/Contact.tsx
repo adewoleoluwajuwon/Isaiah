@@ -7,6 +7,9 @@ export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+
+  // CV download state
   const [downloadingCv, setDownloadingCv] = useState(false);
 
   const isValidEmail = useMemo(
@@ -16,7 +19,7 @@ export default function Contact() {
   const isValid =
     name.trim().length > 1 && isValidEmail && message.trim().length > 4;
 
-  // shared helper (same behavior as in Hero)
+  // === Programmatic CV download (same behavior as Hero) ===
   const downloadCv = async (setLoading: (v: boolean) => void) => {
     setLoading(true);
     try {
@@ -43,6 +46,43 @@ export default function Contact() {
   const handleDownloadCv = useCallback(() => {
     void downloadCv(setDownloadingCv);
   }, []);
+
+  // === Submit to serverless (Resend via /api/contact) ===
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!isValid || sending) return;
+      setSending(true);
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            message: message.trim(),
+            website: "", // honeypot (bots may fill it)
+          }),
+        });
+
+        if (res.ok) {
+          alert("Message sent! I’ll get back to you.");
+          setName("");
+          setEmail("");
+          setMessage("");
+        } else {
+          const { error } = (await res.json().catch(() => ({}))) as {
+            error?: string;
+          };
+          alert(error || "Could not send. Please try again.");
+        }
+      } finally {
+        setSending(false);
+      }
+    },
+    [email, isValid, message, name, sending]
+  );
 
   return (
     <Section id="contact" className="scroll-mt-24">
@@ -100,19 +140,19 @@ export default function Contact() {
         {/* Form */}
         <form
           className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!isValid) return;
-            const subject = encodeURIComponent(
-              `Portfolio contact from ${name.trim()}`
-            );
-            const body = encodeURIComponent(
-              `${message.trim()}\n\nFrom: ${name.trim()} <${email.trim()}>`
-            );
-            window.location.href = `mailto:you@example.com?subject=${subject}&body=${body}`;
-          }}
+          onSubmit={handleSubmit}
           noValidate
         >
+          {/* Honeypot field (hidden visually) */}
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            className="hidden"
+            aria-hidden="true"
+          />
+
           {/* Name */}
           <div>
             <Label
@@ -206,7 +246,8 @@ export default function Contact() {
           <div className="md:col-span-2">
             <Button
               type="submit"
-              disabled={!isValid}
+              disabled={!isValid || sending}
+              aria-busy={sending}
               className="!px-5 !py-2.5 !font-semibold
                          !bg-rose-600 hover:!bg-rose-700 !text-white
                          disabled:!opacity-60 disabled:cursor-not-allowed
@@ -216,17 +257,19 @@ export default function Contact() {
               title={
                 !isValid
                   ? "Fill name, a valid email, and a short message"
+                  : sending
+                  ? "Sending…"
                   : "Send email"
               }
             >
-              Send
+              {sending ? "Sending…" : "Send"}
             </Button>
           </div>
         </form>
 
         <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
-          This form opens your email app with a prefilled message—no data is
-          stored here.
+          This form sends directly from the site via a secure serverless
+          route—no data is stored here.
         </p>
       </div>
     </Section>

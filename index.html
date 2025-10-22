@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- 1) Boot dark mode (your original) -->
     <script>
       (function () {
         const ls = localStorage.getItem("color-theme");
@@ -16,9 +18,78 @@
       })();
     </script>
 
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- 2) Dynamic favicon (red brand, theme-aware ring) -->
+    <script>
+      (function () {
+        const BRAND_INITIAL = "I"; // what letter to show
+        const SIZE = 64; // SVG internal size
+        const R = 30; // circle radius
+        const CX = 32,
+          CY = 32; // center
+        const GRAD1 = "hsl(352 86% 54%)"; // deep red
+        const GRAD2 = "hsl(7 88% 46%)"; // warmer red
+
+        function ensureFaviconLink() {
+          let link = document.querySelector('link[rel="icon"]');
+          if (!link) {
+            link = document.createElement("link");
+            link.rel = "icon";
+            link.type = "image/svg+xml";
+            document.head.appendChild(link);
+          } else {
+            link.type = "image/svg+xml";
+          }
+          return link;
+        }
+
+        function createSvg(dark) {
+          const ringStroke = dark ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.7)";
+          const textFill = "#ffffff"; // white works on both reds
+          const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="${SIZE}" height="${SIZE}" viewBox="0 0 ${SIZE} ${SIZE}">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${GRAD1}"/>
+      <stop offset="100%" stop-color="${GRAD2}"/>
+    </linearGradient>
+  </defs>
+  <circle cx="${CX}" cy="${CY}" r="${R}" fill="url(#g)"/>
+  <circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="${ringStroke}" stroke-width="2"/>
+  <text x="50%" y="58%" text-anchor="middle"
+        font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto"
+        font-weight="800" font-size="34" fill="${textFill}">${BRAND_INITIAL}</text>
+</svg>
+          `.trim();
+          return "data:image/svg+xml;utf8," + encodeURIComponent(svg);
+        }
+
+        function setFaviconForTheme() {
+          const dark = document.documentElement.classList.contains("dark");
+          const link = ensureFaviconLink();
+          link.href = createSvg(dark);
+        }
+
+        // initial set
+        setFaviconForTheme();
+
+        // update when <html class="dark"> flips (ThemeToggle)
+        const mo = new MutationObserver(setFaviconForTheme);
+        mo.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+
+        // also react to prefers-color-scheme changes (if you rely on system)
+        const mq = window.matchMedia("(prefers-color-scheme: dark)");
+        mq.addEventListener?.("change", setFaviconForTheme);
+      })();
+    </script>
+
+    <!-- no physical file needed; this link will be replaced by the script above if present -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>isaiah</title>
+    <title>A. O. Isaiah — Portfolio</title>
   </head>
   <body>
     <div id="root"></div>
