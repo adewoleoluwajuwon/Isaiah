@@ -28,21 +28,21 @@ export default function App() {
       <footer className="py-10 border-t border-gray-200 dark:border-gray-800">
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-center gap-6 text-gray-500 dark:text-gray-400">
           <a
-            href="https://github.com/"
+            href="https://github.com/adewoleoluwajuwon"
             aria-label="GitHub"
             className="hover:text-gray-900 dark:hover:text-gray-200"
           >
             <Github size={20} />
           </a>
           <a
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/in/adewoleoluwajuwon"
             aria-label="LinkedIn"
             className="hover:text-gray-900 dark:hover:text-gray-200"
           >
             <Linkedin size={20} />
           </a>
           <a
-            href="https://twitter.com/"
+            href="https://x.com/adewoleoluwaju2/"
             aria-label="X"
             className="hover:text-gray-900 dark:hover:text-gray-200"
           >
@@ -50,7 +50,7 @@ export default function App() {
           </a>
         </div>
         <p className="mt-4 text-center text-xs text-gray-500 dark:text-gray-400">
-          © {new Date().getFullYear()} Your Name
+          © {new Date().getFullYear()} Adewole O. Isaiah
         </p>
       </footer>
     </div>

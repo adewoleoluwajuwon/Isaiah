@@ -104,7 +104,6 @@ export default function Hero() {
             className="mt-4 text-lg text-rose-900/80 dark:text-rose-100/80"
           >
             Frontend / Full-Stack Developer • React • TypeScript • Tailwind
-            <small>adewoleoluwajuwon@gmail.com</small>
           </motion.p>
 
           <motion.div
