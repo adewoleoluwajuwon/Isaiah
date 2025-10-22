@@ -58,6 +58,22 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Professional Note */}
+        <motion.p
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mt-10 text-center text-sm leading-relaxed text-gray-600 dark:text-gray-400"
+        >
+          <span className="font-medium text-gray-800 dark:text-gray-200">
+            Note:
+          </span>{" "}
+          Some of the projects listed above are part of ongoing or proprietary
+          work and are therefore not publicly accessible. Detailed demos or
+          walkthroughs can be provided privately upon request.
+        </motion.p>
       </div>
     </Section>
   );
