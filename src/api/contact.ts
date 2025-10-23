@@ -22,14 +22,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if ((req.body as any).website) return res.status(200).json({ ok: true }); // honeypot
 
   try {
+    // api/contact.ts (only this line changes)
     const result = await resend.emails.send({
-      from: "Portfolio <hello@yourdomain.com>", // see explanation below
-      to: ["adewoleoluwajuwon@gmail.com"], // can be string or string[]
-      replyTo: email, // <-- FIXED
+      from: "Portfolio <onboarding@resend.dev>", // ✅ works without domain verification
+      to: ["adewoleoluwajuwon@gmail.com"],
+      replyTo: email,
       subject: `Portfolio contact from ${name}`,
       text: `${message}\n\nFrom: ${name} <${email}>`,
-      // Optional nicer formatting:
-      // html: `<p>${escapeHtml(message)}</p><p>From: ${name} &lt;${email}&gt;</p>`
     });
 
     if ((result as any).error) throw new Error(String((result as any).error));
