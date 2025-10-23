@@ -28,7 +28,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: ["adewoleoluwajuwon@gmail.com"],
       replyTo: email,
       subject: `Portfolio contact from ${name}`,
-      text: `${message}\n\nFrom: ${name} <${email}>`,
+      text: `${message}\n\nFrom: ${name} <${email}>\nPortfolio: https://isaiah-ten.vercel.app`,
     });
 
     if ((result as any).error) throw new Error(String((result as any).error));

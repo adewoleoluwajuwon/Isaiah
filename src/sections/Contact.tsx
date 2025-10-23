@@ -113,7 +113,7 @@ export default function Contact() {
         <div className="mt-6 flex flex-col md:flex-row gap-3">
           <Button
             as="a"
-            href="mailto:you@example.com"
+            href="mailto:adewoleoluwajuwon@gmail.com"
             className="md:w-48 !font-semibold
                        !bg-rose-600 hover:!bg-rose-700 !text-white
                        dark:!bg-rose-400 dark:hover:!bg-rose-300 dark:!text-slate-950
