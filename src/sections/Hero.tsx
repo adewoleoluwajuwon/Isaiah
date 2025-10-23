@@ -121,7 +121,7 @@ export default function Hero() {
                   <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/60" />
                 )}
               </span>
-              Open to senior roles & freelance
+              Open to roles & freelance
             </motion.div>
 
             <motion.h1
