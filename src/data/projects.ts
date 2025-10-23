@@ -8,6 +8,12 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Asset Management App",
+    description: "A Java, Springboot, thymleaf app to manage assets",
+    tags: ["C#", ".NET Framework", "SQL"],
+    href: "https://asset-mgt.onrender.com",
+  },
+  {
     title: "SyncSAP Portal",
     description:
       "An SAP B1 integration portal with React + Tailwind frontend and Spring Boot backend. Includes authentication, dashboard UI, and real-time data sync with SAP. (WIP)",
