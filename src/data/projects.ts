@@ -11,7 +11,7 @@ export const projects: Project[] = [
     title: "Asset Management App",
     description: "A Java, Springboot, thymleaf app to manage assets",
     tags: ["C#", ".NET Framework", "SQL"],
-    href: "https://asset-mgt.onrender.com",
+    href: "https://asset-mgt.onrender.co",
   },
   {
     title: "SyncSAP Portal",
