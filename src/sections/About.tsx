@@ -104,7 +104,10 @@ export default function About() {
               {[
                 { k: "Years", v: "5+" },
                 { k: "Projects", v: "30+" },
-                { k: "Domains", v: "FinTech • Telco" },
+                {
+                  k: "Domains",
+                  v: "ERP • Enterprise Solutions • Systems Integration",
+                },
               ].map(({ k, v }) => (
                 <li
                   key={k}
